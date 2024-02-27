@@ -1,3 +1,5 @@
+package com.javabank.classes;
+
 public class Conta {
    public String titular;
    protected double saldo;

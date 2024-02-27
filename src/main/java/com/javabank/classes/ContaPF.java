@@ -1,3 +1,5 @@
+package com.javabank.classes;
+
 public class ContaPF extends Conta {
 
     private int cpf;

@@ -1,3 +1,5 @@
+package com.javabank.classes;
+
 public class ContaPJ extends Conta {
 
     private int cnpj;
