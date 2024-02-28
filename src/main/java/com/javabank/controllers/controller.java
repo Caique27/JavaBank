@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
+
 import com.javabank.classes.Conta;
 import com.javabank.classes.ContaPF;
 import com.javabank.classes.ContaPJ;
@@ -16,13 +17,13 @@ import com.javabank.classes.ContaPJ;
 @RestController
 public class controller {
 
-    public static class ContaRequisicao {
+    public static class RequisicaoConta {
         public String titular;
         public Double saldo;
         public String tipo;
         public int cpf_cnpj;
     }
-  
+ 
     public static ArrayList<Conta> contas = new ArrayList<Conta>();
     private static int maiorIdConta = 0;    
 
@@ -32,13 +33,19 @@ public class controller {
     }
 
     @RequestMapping(value = "/conta/{id}", method = RequestMethod.GET)
-    public String getById(@PathVariable(value = "id") long id) {
-        return "chamada get" + id;        
+    public Conta getById(@PathVariable(value = "id") long id) {
+        int numeroContas = contas.size();
+        for(int index = 0 ; index < numeroContas ; index++){
+            if(contas.get(index).id == id){
+                return contas.get(index);
+            }
+        }
+        return null;
     }
     
     @RequestMapping(value = "/conta", method = RequestMethod.POST)
     @ResponseBody
-    public ArrayList<Conta> post(@RequestBody ContaRequisicao body) {
+    public ArrayList<Conta> post(@RequestBody RequisicaoConta body) {
             if (body.tipo.equals("fisica")){
             ContaPF novaConta = new ContaPF(
                 body.titular,
@@ -62,9 +69,9 @@ public class controller {
         return contas;       
     }
     
-    @RequestMapping(value = "/transferencia", method = RequestMethod.PUT)
+    @RequestMapping(value = "/conta", method = RequestMethod.PUT)
     @ResponseBody
-    public ArrayList<Conta> put(@RequestBody ContaRequisicao body) {
+    public ArrayList<Conta> put(@RequestBody RequisicaoConta body) {
         return contas;        
     }
  
