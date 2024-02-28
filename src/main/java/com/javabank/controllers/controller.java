@@ -23,6 +23,12 @@ public class controller {
         public String tipo;
         public int cpf_cnpj;
     }
+    public static class RequisicaoTransferencia {
+        public int idOrigem;
+        public int idDestino;
+        public double valor;
+        
+    }
  
     public static ArrayList<Conta> contas = new ArrayList<Conta>();
     private static int maiorIdConta = 0;    
@@ -69,9 +75,29 @@ public class controller {
         return contas;       
     }
     
-    @RequestMapping(value = "/conta", method = RequestMethod.PUT)
+    @RequestMapping(value = "/transferencia", method = RequestMethod.PUT)
     @ResponseBody
-    public ArrayList<Conta> put(@RequestBody RequisicaoConta body) {
+    public ArrayList<Conta> put(@RequestBody RequisicaoTransferencia body) {
+        int numeroContas = contas.size();
+        Conta contaOrigem = null;
+        Conta contaDestino = null;
+
+        if(body.idOrigem == body.idDestino){
+            return null;
+        }
+        for(int index = 0 ; index < numeroContas ; index++){
+            if(contas.get(index).id == body.idOrigem){
+                contaOrigem = contas.get(index);
+            }
+            if(contas.get(index).id == body.idDestino){
+                contaDestino = contas.get(index);
+            }
+        }
+        if(contaDestino==null || contaOrigem==null){
+           System.out.println("Conta não encontrada");
+           return null; 
+        }
+        contaOrigem.transferir(body.valor, contaDestino);
         return contas;        
     }
  
