@@ -51,7 +51,7 @@ public class controller {
     
     @RequestMapping(value = "/conta", method = RequestMethod.POST)
     @ResponseBody
-    public ArrayList<Conta> post(@RequestBody RequisicaoConta body) {
+    public ArrayList<Conta> newAccount(@RequestBody RequisicaoConta body) {
             if (body.tipo.equals("fisica")){
             ContaPF novaConta = new ContaPF(
                 body.titular,
@@ -77,7 +77,7 @@ public class controller {
     
     @RequestMapping(value = "/transferencia", method = RequestMethod.PUT)
     @ResponseBody
-    public ArrayList<Conta> put(@RequestBody RequisicaoTransferencia body) {
+    public ArrayList<Conta> transfer(@RequestBody RequisicaoTransferencia body) {
         int numeroContas = contas.size();
         Conta contaOrigem = null;
         Conta contaDestino = null;
@@ -101,7 +101,7 @@ public class controller {
         return contas;        
     }
  
-    @RequestMapping(value = "/conta", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/conta", method = RequestMethod.PUT)
     public String delete() {
         return "chamada delete";        
     }
