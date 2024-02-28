@@ -17,12 +17,12 @@ import com.javabank.classes.ContaPJ;
 public class controller {
 
     public static class ContaRequisicao {
-        protected String titular;
-        protected Double saldo;
-        protected String tipo;
-        protected int cpf_cnpj;
+        public String titular;
+        public Double saldo;
+        public String tipo;
+        public int cpf_cnpj;
     }
-   
+  
     public static ArrayList<Conta> contas = new ArrayList<Conta>();
     private static int maiorIdConta = 0;    
 
@@ -62,9 +62,10 @@ public class controller {
         return contas;       
     }
     
-    @RequestMapping(value = "/conta", method = RequestMethod.PUT)
-    public String put() {
-        return "chamada put";        
+    @RequestMapping(value = "/transferencia", method = RequestMethod.PUT)
+    @ResponseBody
+    public ArrayList<Conta> put(@RequestBody ContaRequisicao body) {
+        return contas;        
     }
  
     @RequestMapping(value = "/conta", method = RequestMethod.DELETE)
