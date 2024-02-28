@@ -5,8 +5,8 @@ public class ContaPJ extends Conta {
     private int cnpj;
     public static double imposto = 0.1;
 
-    public ContaPJ(String titular, double saldo, int cnpj){
-     super(titular, saldo);
+    public ContaPJ(String titular, double saldo, int cnpj, int id){
+     super(titular, saldo, id);
      this.cnpj = cnpj;
     } 
 

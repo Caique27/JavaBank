@@ -3,10 +3,12 @@ package com.javabank.classes;
 public class Conta {
    public String titular;
    protected double saldo;
+   public int id;
 
-   public Conta(String titular, double saldo){
+   public Conta(String titular, double saldo, int id){
     this.titular = titular;
     this.saldo = saldo;
+    this.id = id;
    }
    
    public double getSaldo(){

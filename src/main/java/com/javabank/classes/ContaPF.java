@@ -5,8 +5,8 @@ public class ContaPF extends Conta {
     private int cpf;
     public static double imposto = 0.05;
 
-    public ContaPF(String titular, double saldo, int cpf){
-     super(titular, saldo);
+    public ContaPF(String titular, double saldo, int cpf, int id){
+     super(titular, saldo, id);
      this.cpf = cpf;
     } 
 
