@@ -9,11 +9,7 @@ public class ContaPF extends Conta {
      super(titular, saldo, id);
      this.cpf = cpf;
     } 
-
-    public void sacar(double valor){
-     this.saldo = this.saldo - valor;
-    }
-
+    
     @Override
     public void transferir(double valor, Conta contaDestino){
         this.saldo = this.saldo - (valor *(1.00+imposto));

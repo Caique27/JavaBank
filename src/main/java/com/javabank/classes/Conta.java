@@ -20,6 +20,10 @@ public class Conta {
     return "R$" + valor + "depositados"; 
    }
 
+   public void sacar(double valor){
+     this.saldo = this.saldo - valor;
+   }
+
    public void transferir(double valor, Conta contaDestino){
     this.saldo = this.saldo - valor;
     contaDestino.saldo = contaDestino.saldo + valor;

@@ -32,6 +32,10 @@ public class controller {
         public int idConta;
         public double valor;
     }   
+    public static class RequisicaoSaque {
+        public int idConta;
+        public double valor;
+    }   
  
     public static ArrayList<Conta> contas = new ArrayList<Conta>();
     private static int maiorIdConta = 0;    
@@ -120,6 +124,24 @@ public class controller {
         contaDeposito.depositar(body.valor);
         return contas;
     }
+
+    @RequestMapping(value = "/saque", method = RequestMethod.PUT)
+    @ResponseBody
+    public ArrayList<Conta> withdraw(@RequestBody RequisicaoSaque body) {
+        Conta contaSaque = null;
+        int numeroContas = contas.size();
+        for(int index = 0 ; index < numeroContas ; index++){
+            if(contas.get(index).id == body.idConta){
+                contaSaque = contas.get(index);
+            }
+        }
+        if(contaSaque == null){
+            return null;
+        }
+        contaSaque.sacar(body.valor);
+        return contas;
+    }
+
 
 }
 
