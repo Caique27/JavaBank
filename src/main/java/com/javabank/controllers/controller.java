@@ -27,8 +27,11 @@ public class controller {
         public int idOrigem;
         public int idDestino;
         public double valor;
-        
     }
+    public static class RequisicaoDeposito {
+        public int idConta;
+        public double valor;
+    }   
  
     public static ArrayList<Conta> contas = new ArrayList<Conta>();
     private static int maiorIdConta = 0;    
@@ -101,9 +104,21 @@ public class controller {
         return contas;        
     }
  
-    @RequestMapping(value = "/conta", method = RequestMethod.PUT)
-    public String delete() {
-        return "chamada delete";        
+    @RequestMapping(value = "/deposito", method = RequestMethod.PUT)
+    @ResponseBody
+    public ArrayList<Conta> deposit(@RequestBody RequisicaoDeposito body) {
+        Conta contaDeposito = null;
+        int numeroContas = contas.size();
+        for(int index = 0 ; index < numeroContas ; index++){
+            if(contas.get(index).id == body.idConta){
+                contaDeposito = contas.get(index);
+            }
+        }
+        if(contaDeposito == null){
+            return null;
+        }
+        contaDeposito.depositar(body.valor);
+        return contas;
     }
 
 }
